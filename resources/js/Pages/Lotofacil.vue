@@ -1,5 +1,5 @@
 <template>
-    <Head title="Mega-Sena Predictor" />
+    <Head title="Lotofácil Predictor" />
 
     <!-- Toast Notifications -->
     <Transition name="toast">
@@ -12,7 +12,7 @@
         </div>
     </Transition>
 
-    <div class="min-h-screen p-4 md:p-8 max-w-7xl mx-auto">
+    <div class="min-h-screen p-4 md:p-8 max-w-7xl mx-auto theme-lotofacil">
         <!-- ===== HEADER ===== -->
         <header class="mb-10 animate-fade-in-up">
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
@@ -27,15 +27,17 @@
                     <div class="flex items-center gap-3 mb-2">
                         <!-- Logo icon -->
                         <div class="w-10 h-10 rounded-xl flex items-center justify-center animate-float"
-                             style="background: linear-gradient(135deg, var(--ms-emerald), var(--ms-gold));">
+                             style="background: linear-gradient(135deg, var(--lf-purple), var(--lf-pink));">
                             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round">
-                                <circle cx="12" cy="12" r="3"/>
-                                <circle cx="12" cy="12" r="9" stroke-dasharray="4 3"/>
+                                <rect x="3" y="3" width="7" height="7" rx="1"/>
+                                <rect x="14" y="3" width="7" height="7" rx="1"/>
+                                <rect x="3" y="14" width="7" height="7" rx="1"/>
+                                <rect x="14" y="14" width="7" height="7" rx="1"/>
                             </svg>
                         </div>
                         <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight" style="color: var(--ms-text-primary)">
-                            Mega-Sena
-                            <span class="bg-gradient-to-r from-emerald-400 to-amber-400 bg-clip-text text-transparent">
+                            Lotofácil
+                            <span class="bg-gradient-to-r from-violet-400 to-pink-400 bg-clip-text text-transparent">
                                 Predictor
                             </span>
                         </h1>
@@ -48,7 +50,7 @@
                 <!-- Status + Sync -->
                 <div class="flex items-center gap-3">
                     <div v-if="latestSorteio" class="glass-sm px-4 py-2.5 flex items-center gap-2.5">
-                        <div class="w-2.5 h-2.5 rounded-full animate-pulse-glow" style="background: var(--ms-emerald)"></div>
+                        <div class="w-2.5 h-2.5 rounded-full animate-pulse-glow" style="background: var(--lf-purple)"></div>
                         <div>
                             <div class="text-xs font-medium" style="color: var(--ms-text-secondary)">Último Concurso</div>
                             <div class="text-sm font-bold" style="color: var(--ms-text-primary)">
@@ -62,7 +64,7 @@
                         <span class="text-sm" style="color: var(--ms-text-secondary)">Sem dados — sincronize primeiro</span>
                     </div>
 
-                    <SyncButton syncUrl="/megasena/sync" />
+                    <SyncButton syncUrl="/lotofacil/sync" />
                 </div>
             </div>
         </header>
@@ -71,8 +73,8 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 animate-fade-in-up" style="animation-delay: 100ms">
             <!-- Total sorteios -->
             <div class="glass-sm p-4 flex items-center gap-4">
-                <div class="w-11 h-11 rounded-xl flex items-center justify-center" style="background: rgba(16,185,129,0.12);">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--ms-emerald)" stroke-width="2" stroke-linecap="round">
+                <div class="w-11 h-11 rounded-xl flex items-center justify-center" style="background: rgba(139,92,246,0.12);">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--lf-purple)" stroke-width="2" stroke-linecap="round">
                         <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
                     </svg>
                 </div>
@@ -85,10 +87,10 @@
             <!-- Último sorteio dezenas -->
             <div class="glass-sm p-4" v-if="latestSorteio">
                 <div class="text-xs font-medium mb-2" style="color: var(--ms-text-muted)">Último Resultado</div>
-                <div class="flex gap-1.5 flex-wrap">
+                <div class="flex gap-1 flex-wrap">
                     <div v-for="d in latestSorteio.dezenas" :key="d"
-                         class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold"
-                         style="background: linear-gradient(145deg, var(--ms-gold), var(--ms-gold-dark)); color: #1E293B;">
+                         class="w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-bold"
+                         style="background: linear-gradient(145deg, var(--lf-purple), var(--lf-purple-dark)); color: white;">
                         {{ d }}
                     </div>
                 </div>
@@ -101,16 +103,16 @@
             <!-- Status acumulou -->
             <div class="glass-sm p-4 flex items-center gap-4" v-if="latestSorteio">
                 <div class="w-11 h-11 rounded-xl flex items-center justify-center"
-                     :style="{ background: latestSorteio.acumulou ? 'rgba(245,158,11,0.12)' : 'rgba(16,185,129,0.12)' }">
-                    <svg v-if="latestSorteio.acumulou" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--ms-gold)" stroke-width="2" stroke-linecap="round">
+                     :style="{ background: latestSorteio.acumulou ? 'rgba(236,72,153,0.12)' : 'rgba(139,92,246,0.12)' }">
+                    <svg v-if="latestSorteio.acumulou" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--lf-pink)" stroke-width="2" stroke-linecap="round">
                         <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
                     </svg>
-                    <svg v-else width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--ms-emerald)" stroke-width="2" stroke-linecap="round">
+                    <svg v-else width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--lf-purple)" stroke-width="2" stroke-linecap="round">
                         <path d="M20 6L9 17l-5-5"/>
                     </svg>
                 </div>
                 <div>
-                    <div class="text-lg font-bold" :style="{ color: latestSorteio.acumulou ? 'var(--ms-gold)' : 'var(--ms-emerald)' }">
+                    <div class="text-lg font-bold" :style="{ color: latestSorteio.acumulou ? 'var(--lf-pink)' : 'var(--lf-purple)' }">
                         {{ latestSorteio.acumulou ? 'ACUMULOU!' : 'HOUVE GANHADOR' }}
                     </div>
                     <div class="text-xs" style="color: var(--ms-text-muted)">Concurso {{ latestSorteio.concurso }}</div>
@@ -141,18 +143,18 @@
                         <input
                             type="range"
                             v-model.number="form.qtd_dezenas"
-                            min="6"
+                            min="15"
                             max="20"
                             class="flex-1"
                             id="dezenas-slider"
                         />
                         <div class="w-12 h-10 rounded-lg flex items-center justify-center font-bold text-lg"
-                             style="background: rgba(16,185,129,0.12); color: var(--ms-emerald);">
+                             style="background: rgba(139,92,246,0.12); color: var(--lf-purple);">
                             {{ form.qtd_dezenas }}
                         </div>
                     </div>
                     <div class="flex justify-between text-xs mt-1" style="color: var(--ms-text-muted)">
-                        <span>6</span>
+                        <span>15</span>
                         <span>20</span>
                     </div>
                 </div>
@@ -200,7 +202,7 @@
                     🎰 Jogos Gerados
                 </h2>
                 <span class="text-xs px-2.5 py-1 rounded-full font-medium"
-                      style="background: rgba(16,185,129,0.12); color: var(--ms-emerald);">
+                      style="background: rgba(139,92,246,0.12); color: var(--lf-purple);">
                     {{ latestPrediction.jogos.length }} {{ latestPrediction.jogos.length === 1 ? 'jogo' : 'jogos' }}
                 </span>
             </div>
@@ -212,6 +214,7 @@
                     :game="game"
                     :index="idx"
                     :topScores="topScoredDezenas"
+                    accentColor="var(--lf-purple)"
                 />
             </div>
         </div>
@@ -280,7 +283,7 @@ const props = defineProps({
 
 // Form state
 const form = ref({
-    qtd_dezenas: 6,
+    qtd_dezenas: 15,
     qtd_jogos: 3,
 });
 
@@ -355,7 +358,7 @@ function handlePredict() {
     if (predicting.value) return;
 
     predicting.value = true;
-    router.post('/megasena/predict', {
+    router.post('/lotofacil/predict', {
         qtd_dezenas: form.value.qtd_dezenas,
         qtd_jogos: form.value.qtd_jogos,
     }, {

@@ -21,6 +21,13 @@
 import { ref } from 'vue';
 import { router } from '@inertiajs/vue3';
 
+const props = defineProps({
+    syncUrl: {
+        type: String,
+        default: '/megasena/sync',
+    },
+});
+
 const loading = ref(false);
 let debounceTimer = null;
 
@@ -35,7 +42,7 @@ function handleSync() {
     loading.value = true;
 
     debounceTimer = setTimeout(() => {
-        router.post('/sync', {}, {
+        router.post(props.syncUrl, {}, {
             preserveScroll: true,
             onFinish: () => {
                 loading.value = false;

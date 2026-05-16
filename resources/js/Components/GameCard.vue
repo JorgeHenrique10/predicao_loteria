@@ -4,7 +4,7 @@
             <!-- Card Header -->
             <div class="flex items-center justify-between mb-4">
                 <div class="flex items-center gap-2">
-                    <span class="text-xs font-bold uppercase tracking-widest" style="color: var(--ms-emerald)">
+                    <span class="text-xs font-bold uppercase tracking-widest" :style="{ color: accentColor }">
                         Jogo {{ index + 1 }}
                     </span>
                     <span class="text-xs px-2 py-0.5 rounded-full" style="background: rgba(255,255,255,0.06); color: var(--ms-text-secondary)">
@@ -12,7 +12,7 @@
                     </span>
                 </div>
                 <div class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold"
-                     style="background: linear-gradient(135deg, var(--ms-emerald), var(--ms-emerald-dark)); color: white;">
+                     :style="{ background: `linear-gradient(135deg, ${accentColor}, ${accentColor})`, color: 'white' }">
                     {{ index + 1 }}
                 </div>
             </div>
@@ -47,6 +47,10 @@ const props = defineProps({
     topScores: {
         type: Array,
         default: () => [],
+    },
+    accentColor: {
+        type: String,
+        default: 'var(--ms-emerald)',
     },
 });
 
